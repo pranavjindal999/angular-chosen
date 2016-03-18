@@ -20,7 +20,9 @@ angular.module('localytics.directives').directive 'chosen', ['$timeout', ($timeo
     'singleBackstrokeDelete'
     'displayDisabledOptions'
     'displaySelectedOptions'
-    'width'
+    'width',
+    'displayTruncatedOptions',
+    'optionDisplayMaxLength'
   ]
 
   snakeCase = (input) -> input.replace /[A-Z]/g, ($1) -> "_#{$1.toLowerCase()}"
