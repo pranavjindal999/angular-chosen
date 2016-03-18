@@ -6,7 +6,7 @@
     "example"
   ],
   "dependencies": {
-    "chosen": "https://github.com/harvesthq/bower-chosen.git#v1.4.1",
+    "chosen": "https://github.com/wingify/chosen.git#v1.4.2-wingify-patch1",
     "angular": ">=1.2.0"
   }
 }
