@@ -6,7 +6,7 @@
     "example"
   ],
   "dependencies": {
-    "chosen": "https://github.com/wingify/chosen/archive/v1.4.2-wingify-patch2.zip",
+    "chosen": "https://github.com/wingify/chosen/archive/v1.4.2-wingify-patch3.zip",
     "angular": ">=1.2.0"
   }
 }
