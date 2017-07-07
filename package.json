@@ -1,0 +1,23 @@
+{
+  "name": "angular-chosen",
+  "version": "1.0.0",
+  "description": "angular-chosen",
+  "main": "chosen.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wingify/angular-chosen.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wingify/angular-chosen/issues"
+  },
+  "homepage": "https://github.com/wingify/angular-chosen#readme"
+}
