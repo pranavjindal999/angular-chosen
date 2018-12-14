@@ -90,6 +90,27 @@
           if (attr.ngOptions && ngModel) {
             match = attr.ngOptions.match(NG_OPTIONS_REGEXP);
             valuesExpr = match[7];
+            var options = scope.$eval(valuesExpr);
+            // Adding title in case of array of options and object data source
+            if (options && typeof options === 'object') {
+                /*Timeout is required to make it work. Without timeout, options with title are formed initially but because of ng-options, some how
+                options are rendered again and removed all titles from options
+                TODO: will debug it to find out reason */
+                $timeout(function() {
+                    // Convert object into array first and then assign titles to all options according to values of object
+                    if(!options.length) {
+                        options = Object.keys(options).map(function(key) {
+                            return options[key]
+                        })
+                    }
+                    for (var index=options.length - 1,lastOptionIndex =  $(element).find("option").length - 1;index>= 0;index--,lastOptionIndex--){
+                        var elem = $(element).find("option")[lastOptionIndex];
+                        if(options[index].tooltip_text) {
+                            $(elem).attr("title", options[index].tooltip_text);
+                        }
+                    }
+                })
+            }
             scope.$watchCollection(valuesExpr, function(newVal, oldVal) {
               var timer;
               return timer = $timeout(function() {
