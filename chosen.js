@@ -98,7 +98,7 @@
                 TODO: will debug it to find out reason */
                 $timeout(function() {
                     // Convert object into array first and then assign titles to all options according to values of object
-                    if(!options.length) {
+                    if(!(options instanceof Array)) {
                         options = Object.keys(options).map(function(key) {
                             return options[key]
                         })
