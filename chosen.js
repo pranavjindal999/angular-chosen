@@ -103,8 +103,9 @@
                             return options[key]
                         })
                     }
-                    for (var index=options.length - 1,lastOptionIndex =  $(element).find("option").length - 1;index>= 0;index--,lastOptionIndex--){
-                        var elem = $(element).find("option")[lastOptionIndex];
+                    var optionElements = $(element).find("option");
+                    for (var index=options.length - 1,lastOptionIndex =  optionElements.length - 1;index>= 0;index--,lastOptionIndex--){
+                        var elem = optionElements[lastOptionIndex];
                         if(options[index].tooltip_text) {
                             $(elem).attr("title", options[index].tooltip_text);
                         }
