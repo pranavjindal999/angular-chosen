@@ -90,20 +90,25 @@
           if (attr.ngOptions && ngModel) {
             match = attr.ngOptions.match(NG_OPTIONS_REGEXP);
             valuesExpr = match[7];
-            var options = scope.$eval(valuesExpr);
+            var dataSource = scope.$eval(valuesExpr);
             // Adding title in case of array of options and object data source
-            if (options && typeof options === 'object') {
+            if (dataSource && typeof dataSource === 'object') {
                 /*Timeout is required to make it work. Without timeout, options with title are formed initially but because of ng-options, some how
                 options are rendered again and removed all titles from options
                 TODO: will debug it to find out reason */
                 $timeout(function() {
+                    var options;
                     // Convert object into array first and then assign titles to all options according to values of object
-                    if(!(options instanceof Array)) {
-                        options = Object.keys(options).map(function(key) {
-                            return options[key]
+                    if(!(dataSource instanceof Array)) {
+                        options = Object.keys(dataSource).map(function(key) {
+                            return dataSource[key]
                         })
                     }
+                    else {
+                      options = dataSource;
+                    }
                     var optionElements = $(element).find("option");
+                    // As need to assign title only to dynamic option element created by ng-options, so traverse the option elements from last
                     for (var index=options.length - 1,lastOptionIndex =  optionElements.length - 1;index>= 0;index--,lastOptionIndex--){
                         var elem = optionElements[lastOptionIndex];
                         if(options[index].tooltip_text) {
