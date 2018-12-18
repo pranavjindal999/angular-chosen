@@ -116,7 +116,6 @@
           if (attr.ngOptions && ngModel) {
             match = attr.ngOptions.match(NG_OPTIONS_REGEXP);
             valuesExpr = match[7];
-            addOptionTitle();
             scope.$watchCollection(valuesExpr, function(newVal, oldVal) {
               var timer;
               return timer = $timeout(function() {
