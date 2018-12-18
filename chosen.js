@@ -51,22 +51,22 @@
               var dataSource = scope.$eval(valuesExpr);
               // Adding title in case of array of options and object data source
               if (dataSource && typeof dataSource === 'object') {
-                  var options;
+                  var dataSourceList;
                   // Convert object into array first and then assign titles to all options according to values of object
                   if(!(dataSource instanceof Array)) {
-                      options = Object.keys(dataSource).map(function(key) {
+                      dataSourceList = Object.keys(dataSource).map(function(key) {
                           return dataSource[key]
                       })
                   }
                   else {
-                      options = dataSource;
+                      dataSourceList = dataSource;
                   }
                   var optionElements = $(element).find("option");
                   // As need to assign title only to dynamic option element created by ng-options, so traverse the option elements from last
-                  for (var index=options.length - 1,lastOptionIndex =  optionElements.length - 1;index>= 0;index--,lastOptionIndex--){
+                  for (var index=dataSourceList.length - 1,lastOptionIndex =  optionElements.length - 1;index>= 0;index--,lastOptionIndex--){
                       var elem = optionElements[lastOptionIndex];
-                      if(options[index].tooltip_text) {
-                          $(elem).attr("title", options[index].tooltip_text);
+                      if(dataSourceList[index].tooltip_text) {
+                          $(elem).attr("title", dataSourceList[index].tooltip_text);
                       }
                   }
               }
