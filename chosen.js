@@ -32,7 +32,7 @@
         require: '?ngModel',
         priority: 1,
         link: function(scope, element, attr, ngModel) {
-          var chosen, defaultText, disableWithMessage, empty, initOrUpdate, match, options, origRender, removeEmptyMessage, startLoading, stopLoading, valuesExpr, viewWatch;
+          var chosen, defaultText, disableWithMessage, empty, initOrUpdate, match, options, origRender, removeEmptyMessage, startLoading, stopLoading, valuesExpr, viewWatch, addOptionTitle;
           element.addClass('localytics-chosen');
           options = scope.$eval(attr.chosen) || {};
           angular.forEach(attr, function(value, key) {
@@ -45,6 +45,32 @@
           };
           stopLoading = function() {
             return element.removeClass('loading').attr('disabled', false).trigger('chosen:updated');
+          };
+          addOptionTitle = function() {
+            if (attr.ngOptions && ngModel) {
+              var dataSource = scope.$eval(valuesExpr);
+              // Adding title in case of array of options and object data source
+              if (dataSource && typeof dataSource === 'object') {
+                  var dataSourceList;
+                  // Convert object into array first and then assign titles to all options according to values of object
+                  if(!(dataSource instanceof Array)) {
+                      dataSourceList = Object.keys(dataSource).map(function(key) {
+                          return dataSource[key]
+                      })
+                  }
+                  else {
+                      dataSourceList = dataSource;
+                  }
+                  var optionElements = $(element).find("option");
+                  // As need to assign title only to dynamic option element created by ng-options, so traverse the option elements from last
+                  for (var index=dataSourceList.length - 1,lastOptionIndex =  optionElements.length - 1;index>= 0;index--,lastOptionIndex--){
+                      var elem = optionElements[lastOptionIndex];
+                      if(dataSourceList[index].tooltip_text) {
+                          $(elem).attr("title", dataSourceList[index].tooltip_text);
+                      }
+                  }
+              }
+            }
           };
           chosen = null;
           defaultText = null;
@@ -99,6 +125,7 @@
                   if (empty) {
                     removeEmptyMessage();
                   }
+                  addOptionTitle();
                   stopLoading();
                   if (isEmpty(newVal)) {
                     return disableWithMessage();
