@@ -107,7 +107,4 @@ angular.module('localytics.directives').directive 'chosen', ['$timeout', ($timeo
             stopLoading()
             disableWithMessage() if isEmpty(newVal)
         )
-
-      scope.$on '$destroy', (event) ->
-        $timeout.cancel timer if timer?
 ]
